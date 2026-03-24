@@ -9,14 +9,10 @@ export class UserService {
     return [];
   }
 
-  private readonly UserFilePath = path.join(
-    process.cwd(),
-    'data',
-    'users.json',
-  );
-
   async findAll(): Promise<IUser[]> {
-    const data = await fs.readFile(this.UserFilePath, 'utf-8');
-    return JSON.parse(data) as IUser[];
+    const filePath = path.join(process.cwd(), 'data', 'users.json');
+    const data = await fs.readFile(filePath, 'utf-8');
+    const users: IUser[] = JSON.parse(data);
+    return users;
   }
 }
