@@ -10,9 +10,9 @@ export class UserService {
   }
 
   findAll(): Promise<IUser[]> {
-    const filePath = path.join(process.cwd(), 'data', 'users.json');
+    const filePath = path.join(__dirname, '..', '..', 'data', 'users.json');
     const fileContent = fs.readFileSync(filePath, 'utf-8');
-    const users: IUser[] = JSON.parse(fileContent);
+    const users = JSON.parse(fileContent) as IUser[];
 
     return Promise.resolve(users);
   }
