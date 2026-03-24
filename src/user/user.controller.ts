@@ -10,7 +10,7 @@ export class UserController {
     return this.userService.test();
   }
 
-  @Get('users')
+  @Get()
   getUsers() {
     return this.userService.findAll();
   }
