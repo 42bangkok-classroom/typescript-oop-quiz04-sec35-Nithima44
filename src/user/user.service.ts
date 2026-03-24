@@ -9,11 +9,11 @@ export class UserService {
     return [];
   }
 
-  findAll(): Promise<IUser[]> {
+  findAll(): IUser[] {
     const filePath = path.join(__dirname, '..', '..', 'data', 'users.json');
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     const users = JSON.parse(fileContent) as IUser[];
 
-    return Promise.resolve(users);
+    return users;
   }
 }

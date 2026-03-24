@@ -12,7 +12,7 @@ export class UserController {
   }
 
   @Get()
-  getAllUsers(): Promise<IUser[]> {
+  getAllUsers(): IUser[] {
     return this.userService.findAll();
   }
 }
