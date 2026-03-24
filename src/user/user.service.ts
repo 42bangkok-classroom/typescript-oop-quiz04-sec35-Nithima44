@@ -13,7 +13,7 @@ export class UserService {
 
   async findAll(): Promise<IUser[]> {
     const data = await fs.promises.readFile(this.filePath, 'utf-8');
-    const users: IUser[] = JSON.parse(data);
+    const users = JSON.parse(data) as IUser[];
     return users;
   }
 }
