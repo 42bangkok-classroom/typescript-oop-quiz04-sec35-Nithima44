@@ -1,4 +1,4 @@
-import { Get, Controller } from '@nestjs/common';
+import { Get, Controller, Param, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 import { IUser } from './user.interface';
 
@@ -14,5 +14,15 @@ export class UserController {
   @Get()
   getAllUsers(): IUser[] {
     return this.userService.findAll();
+  }
+
+  @Get(':id')
+  findOne(
+    @Param('id') id: string,
+    @Query('fields') fields: string,
+  ): Partial<IUser> {
+    const fieldsArray = fields ? fields.split(',') : undefined;
+
+    return this.userService.findOne(id, fieldsArray);
   }
 }
