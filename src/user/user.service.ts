@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import * as fs from 'fs/promises';
+import * as fs from 'fs';
 import { IUser } from './user.interface';
 import * as path from 'path';
 
@@ -9,14 +9,11 @@ export class UserService {
     return [];
   }
 
-  private readonly filePath = path.join(__dirname, '../../data/users.json');
+  findAll(): IUser[] {
+    const filePath = path.join(process.cwd(), 'data', 'users.json');
+    const fileContent = fs.readFileSync(filePath, 'utf-8');
+    const users: IUser[] = JSON.parse(fileContent);
 
-  private async readData(): Promise<IUser[]> {
-    const data = await fs.readFile(this.filePath, 'utf-8');
-    return JSON.parse(data) as IUser[];
-  }
-
-  async findAll(): Promise<IUser[]> {
-    return await this.readData();
+    return users;
   }
 }
