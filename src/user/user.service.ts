@@ -12,12 +12,8 @@ export class UserService {
   private readonly filePath = path.join(process.cwd(), 'data', 'users.json');
 
   async findAll(): Promise<IUser[]> {
-    try {
-      const data = await fs.promises.readFile(this.filePath, 'utf-8');
-      const users: IUser[] = JSON.parse(data);
-      return users;
-    } catch (error) {
-      return [];
-    }
+    const data = await fs.promises.readFile(this.filePath, 'utf-8');
+    const users: IUser[] = JSON.parse(data);
+    return users;
   }
 }
